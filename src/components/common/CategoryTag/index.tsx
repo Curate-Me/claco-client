@@ -13,7 +13,7 @@ export const CategoryTag = ({ categoryType, className }: CategoryTagProps) => {
       case "공연예정":
         return "border-[1px] border-grayscale-70";
       default:
-        return;
+        return "border-[1px] border-grayscale-70";
     }
   };
   return (
