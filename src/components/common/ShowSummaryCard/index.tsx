@@ -31,7 +31,8 @@ export const ShowSummaryCard = ({ data }: ShowSummaryCardProps) => {
         <img
           src={data.poster}
           alt="poster"
-          className="w-[131px] h-[172px] rounded-[5px] object-cover"
+          className="w-[123px] h-[172px] rounded-[5px] object-cover"
+          onClick={() => gotoShowDetail(data.id)}
         />
         <div className="absolute top-0 left-0 w-full h-[70px] bg-gradient-to-b from-[rgba(0,0,0,0.40)] to-[rgba(102,102,102,0.00)] pointer-events-none"></div>
 
@@ -40,7 +41,7 @@ export const ShowSummaryCard = ({ data }: ShowSummaryCardProps) => {
         </div>
 
         <span
-          className="absolute top-[13px] right-[10px]"
+          className="absolute top-[13px] right-[10px] z-50"
           onClick={handleLike}
         >
           {isLiked ? (

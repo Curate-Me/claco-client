@@ -32,7 +32,7 @@ export const MyPage = () => {
     navigate("/mypage/user");
   };
 
-  if (shouldShowSkeleton) {
+  if (isLoading || shouldShowSkeleton) {
     return (
       <div className="pt-[41px] px-[24px] pb-[110px] min-h-screen relative">
         <div className="flex flex-col relative items-center justify-center">

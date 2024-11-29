@@ -15,7 +15,7 @@ const ShowPoster = forwardRef<HTMLDivElement, DetailsInfoSectionProps>(
     const checkImageHeight = () => {
       if (imageRef.current) {
         const imageHeight = imageRef.current.naturalHeight;
-        setIsImageOverflow(imageHeight > 2000);
+        setIsImageOverflow(imageHeight > 4000);
       }
     };
 
