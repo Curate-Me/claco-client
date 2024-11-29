@@ -126,6 +126,8 @@ export const ClacoBookPage = () => {
 
   const handleClacoBookDetail = (id: number, title: string) => {
     queryClient.invalidateQueries({ queryKey: ["clacoTicketList", id] });
+    queryClient.invalidateQueries({ queryKey: ["recommend-clacoticket"] });
+
     navigate(`/ticketbook/${id}?title=${title}`);
   };
 
