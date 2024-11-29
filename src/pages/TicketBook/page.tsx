@@ -35,7 +35,7 @@ export const ClacoBookPage = () => {
     if (data && !isLoading) {
       setSelectClacoBook(data.result.clacoBookList[0]);
     }
-  }, [data, isLoading]);
+  }, [data, isLoading, setSelectClacoBook]);
   const clacoBookList = Array.isArray(data?.result?.clacoBookList)
     ? data?.result?.clacoBookList
     : [];
