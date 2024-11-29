@@ -31,6 +31,21 @@ export const ShowFilter = ({ onClose, onApply }: ShowFilterProps) => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
 
   useEffect(() => {
+    const savedFilter = localStorage.getItem("filterObj");
+    if (savedFilter) {
+      const parsedFilter = JSON.parse(savedFilter);
+      setMinPrice(parsedFilter.minPrice || 0);
+      setMaxPrice(parsedFilter.maxPrice || 1000000);
+      setSelectedLocation(parsedFilter.selectedLocation || []);
+      setSelectedFeatures(parsedFilter.categories || []);
+      setRangeStart(
+        parsedFilter.startDate ? new Date(parsedFilter.startDate) : null,
+      );
+      setRangeEnd(parsedFilter.endDate ? new Date(parsedFilter.endDate) : null);
+    }
+  }, []);
+
+  useEffect(() => {
     const timer = setTimeout(() => setIsVisible(true), 50);
     return () => clearTimeout(timer);
   }, []);
@@ -86,7 +101,7 @@ export const ShowFilter = ({ onClose, onApply }: ShowFilterProps) => {
     console.log(label);
     if (values.every((value) => selectedLocation.includes(value))) {
       setSelectedLocation(
-        selectedLocation.filter((loc) => !values.includes(loc))
+        selectedLocation.filter((loc) => !values.includes(loc)),
       );
     } else {
       setSelectedLocation([...selectedLocation, ...values]);
