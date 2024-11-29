@@ -129,7 +129,7 @@ export const TicketInfoPage = () => {
     setNewCasting("");
   };
 
-  if (shouldShowSkeleton) {
+  if (isLoading || shouldShowSkeleton) {
     return (
       <div className="relative flex flex-col min-h-screen px-[24px] pt-[46px] pb-[60px]">
         <div className="flex flex-col gap-[33px] mb-[37px]">
