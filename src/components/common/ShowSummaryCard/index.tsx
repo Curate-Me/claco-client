@@ -80,7 +80,7 @@ export const ShowSummaryCard = ({ data }: ShowSummaryCardProps) => {
             </span>
           ))}
         </div>
-        <div className="absolute right-0 bottom-[12px] w-[50px] h-[26px] bg-gradient-to-r from-transparent to-[#1C1C1C]" />
+        <div className="absolute right-0 bottom-0 w-[63px] h-[26px] bg-gradient-to-r from-transparent to-[#1C1C1C]" />
       </div>
     </div>
   );
