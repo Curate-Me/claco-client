@@ -158,19 +158,19 @@ export const ClacoBookPage = () => {
         <span className="headline2-bold text-grayscale-80 mb-[152px] h-[26px]">
           티켓북
         </span>
-        <div className="flex flex-col items-center justify-center">
+        <div className="flex flex-col relative items-center justify-center">
           <div className="flex flex-col items-center justify-center">
             <span className="heading2-bold text-grayscale-80">
               공연은 즐겁게 관람하셨나요?
             </span>
-            <div className="relative flex items-center justify-center">
+            <div className="flex items-center justify-center">
               <img
                 src={showReview}
                 alt="showReview"
                 className="object-contain mb-[53px]"
               />
-              <div className="absolute bottom-0 flex text-center">
-                <span className="body2-regular text-grayscale-70 mb-[39px]">
+              <div className="absolute bottom-[88px] flex text-center">
+                <span className="body2-regular text-grayscale-70">
                   티켓북에 공연 감상을 등록하고
                   <br />
                   나만의 티켓을 만들어보세요!
