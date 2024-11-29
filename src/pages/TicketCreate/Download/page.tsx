@@ -51,7 +51,7 @@ export const TicketDownloadPage = () => {
     try {
       const canvas = await html2canvas(ticketRef.current, {
         scale: 2,
-        backgroundColor: "#1C1C1C",
+        backgroundColor: null,
         useCORS: true,
         allowTaint: true,
         logging: true,
