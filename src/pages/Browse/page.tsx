@@ -130,6 +130,10 @@ export const BrowsePage = () => {
 
   const handleTabClick = (tab: TabMenu) => {
     setActiveTab(tab);
+    setIsFilterOn(false);
+    setFilterValue(null);
+    localStorage.removeItem("filterObj");
+    handleRefreshClick();
   };
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -304,7 +308,7 @@ export const BrowsePage = () => {
 
               <div className="flex items-center justify-between gap-3 py-1">
                 {hasActiveFilters ? (
-                  <div className="flex text-center gap-[5px] pl-1 overflow-x-auto scrollbar-hide">
+                  <div className="flex text-center gap-[5px] pl-1 py-[2px] overflow-x-auto scrollbar-hide">
                     {filterState.priceRange && (
                       <div className="rounded-[20px] px-[10px] py-1 border-[0.5px] border-grayscale-60 bg-transparent caption-12 text-grayscale-60 whitespace-nowrap">
                         {filterState.priceRange}
