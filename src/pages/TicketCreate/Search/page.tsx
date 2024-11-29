@@ -3,7 +3,7 @@ import { ConfirmButton } from "@/components/common/Button";
 import { SearchBar } from "@/components/common/Search/Bar";
 import { SearchCard } from "@/components/common/Search/Card";
 import { Progress } from "@/components/ui/progress";
-import { useGetAutoCompleteSearch } from "@/hooks/queries";
+import { useGetReviewAutoCompleteSearch } from "@/hooks/queries";
 import { useDebouncedState } from "@/hooks/utils";
 import { AutoCompleteSearchCard } from "@/types";
 import { useEffect, useRef, useState } from "react";
@@ -18,7 +18,7 @@ export const TicketSearchPage = () => {
   const navigate = useNavigate();
 
   const { data: autoCompleteData, isLoading: autoCompleteDataLoading } =
-    useGetAutoCompleteSearch(debouncedQuery);
+    useGetReviewAutoCompleteSearch(debouncedQuery);
 
   const handleBackClick = () => {
     localStorage.removeItem("clacoBookId");

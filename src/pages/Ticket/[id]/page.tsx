@@ -124,7 +124,7 @@ export const ClacoTicketDetailPage = () => {
   }
 
   return (
-    <div className="relative flex flex-col pt-[46px] items-center justify-center px-6 mb-[234px]">
+    <div className="relative flex flex-col pt-[46px] items-center justify-center px-6 pb-[220px]">
       <ThumbnailModal
         isShow={isThumbnailShow}
         isAnimating={isAnimating}
@@ -142,7 +142,6 @@ export const ClacoTicketDetailPage = () => {
         {reviewData && (
           <div className="flex space-x-1">
             <CategoryTag categoryType={reviewData?.genreName} />
-            <CategoryTag categoryType={reviewData?.concertState} />
           </div>
         )}
 
