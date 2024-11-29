@@ -23,15 +23,15 @@ client.interceptors.response.use(
     }
 
     // /* 해당 에러 발생 시 재로그인 하도록 로그인 화면으로 리다이렉트 */
-    // if (
-    //   res.data.code === "ACT-001" ||
-    //   res.data.code === "RFT-001" ||
-    //   res.data.code === "MSE-001" ||
-    //   res.data.code === "ATH-001"
-    // ) {
-    //   localStorage.clear();
-    //   window.location.replace("/");
-    // }
+    if (
+      res.data.code === "ACT-001" ||
+      res.data.code === "RFT-001" ||
+      res.data.code === "MSE-001" ||
+      res.data.code === "ATH-001"
+    ) {
+      localStorage.clear();
+      window.location.replace("/");
+    }
     return res;
   },
   async (error) => {
