@@ -52,7 +52,7 @@ export const ShowSummaryCard = ({ data }: ShowSummaryCardProps) => {
         </span>
       </div>
 
-      <div className="flex flex-col ml-4 max-w-[207px]" onClick={() => gotoShowDetail(data.id)}>
+      <div className="flex flex-col relative ml-4 max-w-[207px]" onClick={() => gotoShowDetail(data.id)}>
         <div className="flex flex-col min-w-[186px]">
           <span className="caption-12 self-start mb-[9px]">
             <CategoryTag categoryType={data.prfstate} />
@@ -80,6 +80,7 @@ export const ShowSummaryCard = ({ data }: ShowSummaryCardProps) => {
             </span>
           ))}
         </div>
+        <div className="absolute right-0 bottom-[12px] w-[50px] h-[26px] bg-gradient-to-r from-transparent to-[#1C1C1C]" />
       </div>
     </div>
   );
