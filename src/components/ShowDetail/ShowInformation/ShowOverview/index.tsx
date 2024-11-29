@@ -6,7 +6,7 @@ import { ReactComponent as Megaphone } from "@/assets/svgs/Megaphone.svg";
 import { ReactComponent as Book } from "@/assets/svgs/Book.svg";
 import { Genre } from "@/components/common/Genre";
 import { useNavigate, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ShowCategory } from "@/types";
 import { usePostLike } from "@/hooks/mutation";
 import { useConcertInfoStore } from "@/libraries/store/concertInfo";
@@ -52,8 +52,18 @@ const ShowOverview = ({
   const navigate = useNavigate();
   const [_liked, setLiked] = useState(liked);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [showButton, setShowButton] = useState(false);
+  const textRef = useRef<HTMLParagraphElement>(null);
   const mutation = usePostLike();
   const { id } = useParams<{ id: string }>();
+
+  useEffect(() => {
+    if (textRef.current) {
+      const height = textRef.current.getBoundingClientRect().height;
+
+      setShowButton(height > 40);
+    }
+  }, [summary]);
 
   const gotoBack = () => {
     navigate(-1);
@@ -132,28 +142,32 @@ const ShowOverview = ({
           <span className="headline2-bold">Claco 쉬운 공연 설명</span>
         </div>
 
-        <p
-          className={`body2-medium text-grayscale-70 mb-[10px] ${
-            isExpanded ? "" : "line-clamp-2"
-          }`}
-        >
-          {summary || "공연 설명이 없습니다."}
-        </p>
-
-        <button
-          onClick={toggleExpanded}
-          className="flex justify-center mb-[17px]"
-        >
-          <BackArrow
-            width="14"
-            height="14"
-            viewBox="0 0 11 20"
-            className={`text-grayscale-60 ${
-              isExpanded ? "rotate-90" : "-rotate-90"
+        <div className="flex flex-col items-center justify-center mb-[17px]">
+          <p
+            ref={textRef}
+            className={`body2-medium text-grayscale-70 ${
+              showButton && !isExpanded ? "line-clamp-2" : "mb-[15px]"
             }`}
-          />
-        </button>
+          >
+            {summary || ""}
+          </p>
 
+          {showButton && (
+            <button
+              onClick={toggleExpanded}
+              className="flex justify-center mt-[15px]"
+            >
+              <BackArrow
+                width="14"
+                height="14"
+                viewBox="0 0 11 20"
+                className={`text-grayscale-60 ${
+                  isExpanded ? "rotate-90" : "-rotate-90"
+                }`}
+              />
+            </button>
+          )}
+        </div>
         <div className="flex space-x-2 items-center mb-[22px]">
           <Book />
           <span className="headline2-bold">이런 느낌의 공연이에요</span>
