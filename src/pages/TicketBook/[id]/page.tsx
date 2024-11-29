@@ -189,8 +189,15 @@ export const ClacoBookDetailPage = () => {
     return (
       <>
         <div className="relative flex flex-col pt-[46px] items-center justify-center px-6">
-          <div className="flex justify-center items-center w-full mb-[56px] h-[26px]">
-            <span className="headline2-bold text-grayscale-80">
+          <div className="flex justify-center items-center w-full mb-[56px] h-[26px] relative">
+            <BackArrow
+            width="8"
+            height="15"
+            viewBox="0 0 11 20"
+            className="absolute left-0 cursor-pointer"
+            onClick={() => navigate(-1)}
+            />
+            <span className="headline2-bold text-grayscale-80 text-center">
               {currentClacoBook}
             </span>
           </div>
