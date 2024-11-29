@@ -18,6 +18,7 @@ import {
 } from "@/hooks/mutation";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useDeferredLoading } from "@/hooks/utils";
+import { useQueryClient } from "@tanstack/react-query";
 
 export const ClacoBookPage = () => {
   const [isEditing, setIsEditing] = useState<boolean>(false);
@@ -34,7 +35,7 @@ export const ClacoBookPage = () => {
     if (data && !isLoading) {
       setSelectClacoBook(data.result.clacoBookList[0]);
     }
-  }, [data, isLoading]);
+  }, [data, isLoading, setSelectClacoBook]);
   const clacoBookList = Array.isArray(data?.result?.clacoBookList)
     ? data?.result?.clacoBookList
     : [];
@@ -44,6 +45,7 @@ export const ClacoBookPage = () => {
   const { mutate: editClacoBook } = usePutEditClacoBook();
 
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -123,6 +125,9 @@ export const ClacoBookPage = () => {
   };
 
   const handleClacoBookDetail = (id: number, title: string) => {
+    queryClient.invalidateQueries({ queryKey: ["clacoTicketList", id] });
+    queryClient.invalidateQueries({ queryKey: ["recommend-clacoticket"] });
+
     navigate(`/ticketbook/${id}?title=${title}`);
   };
 

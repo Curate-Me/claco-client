@@ -19,7 +19,7 @@ export const TicketDownloadPage = () => {
   const [loadingState, setLoadingState] = useState<boolean>(true);
   const posterUrl = (localStorage.getItem("poster") || "").replace(
     /^"|"$/g,
-    "",
+    ""
   );
 
   const { mutate: uploadTicketImage, data: ticketData } = usePutTicketImage();
@@ -74,7 +74,7 @@ export const TicketDownloadPage = () => {
           onSuccess: () => {
             setIsChecked(true);
           },
-        },
+        }
       );
     } catch (error) {
       console.error("티켓 이미지 변환/업로드 실패:", error);
