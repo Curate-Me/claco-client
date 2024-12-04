@@ -1,4 +1,5 @@
 import axios, { InternalAxiosRequestConfig } from "axios";
+import refreshToken from "./refreshToken";
 
 const client = axios.create({
   baseURL: import.meta.env.VITE_SERVER_URL,
@@ -11,15 +12,12 @@ const client = axios.create({
 
 client.interceptors.response.use(
   (res) => {
-    // console.log(res);
-
-    // /* refreshed 필드가 true일 경우 새로운 액세스 토큰을 발급받은 것이므로
-    //   기존 로컬 스토리지에 담긴 만료된 액세스 토큰을 새 엑세스 토큰으로 교체
-    // */
     if (res.data.refreshed) {
       const new_accessToken = res.headers["authorization"];
-      localStorage.setItem("accessToken", new_accessToken);
-      window.location.replace("/main");
+      if (new_accessToken) {
+        localStorage.setItem("accessToken", new_accessToken);
+        window.location.replace("/main");
+      }
     }
 
     // /* 해당 에러 발생 시 재로그인 하도록 로그인 화면으로 리다이렉트 */
@@ -35,9 +33,22 @@ client.interceptors.response.use(
     return res;
   },
   async (error) => {
+    if (error.response?.status === 401) {
+      try {
+        await refreshToken();
+
+        return client.request(error.config);
+      } catch (refreshError) {
+        console.error(refreshError);
+
+        localStorage.clear();
+        window.location.replace("/");
+      }
+    }
+
     console.error(error);
     return Promise.reject(error);
-  }
+  },
 );
 
 client.interceptors.request.use(
@@ -54,6 +65,6 @@ client.interceptors.request.use(
   },
   (error) => {
     return Promise.reject(error);
-  }
+  },
 );
 export default client;
