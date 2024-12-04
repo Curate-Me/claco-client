@@ -76,8 +76,7 @@ const useGetConcertFilters = ({
       }),
     initialPageParam: 1,
     getNextPageParam: (lastPage, allPages) => {
-      return lastPage.result.currentPage !== allPages[0].result.totalPage ||
-        lastPage.result.totalPage !== 0
+      return lastPage.result.currentPage !== allPages[0].result.totalPage
         ? lastPage.result.currentPage + 1
         : undefined;
     },

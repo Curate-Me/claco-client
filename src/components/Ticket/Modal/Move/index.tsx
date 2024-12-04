@@ -17,6 +17,7 @@ export const MoveModal = ({
   onSelect,
 }: MoveModalProps) => {
   const [isMove, setIsMove] = useState<boolean>(false);
+  const [isSelect, setIsSelect] = useState<boolean>(false);
   const handleConfirm = () => {
     if (isMove) {
       onConfirm();
@@ -31,6 +32,7 @@ export const MoveModal = ({
       onNegativeButtonClick={onClose}
       onPositiveButtonClick={handleConfirm}
       title={isMove ? "" : "티켓을 이동할 티켓북을 선택해주세요"}
+      disabled={!isSelect}
     >
       {isMove ? (
         <div className="flex flex-col items-center justify-center mb-[30px]">
@@ -46,7 +48,10 @@ export const MoveModal = ({
                 <RadioGroupItem
                   value={item.title}
                   id={String(index)}
-                  onClick={() => onSelect(item as ClacoBookList)}
+                  onClick={() => {
+                    setIsSelect(true);
+                    onSelect(item as ClacoBookList);
+                  }}
                   className="mr-[10px] border-grayscale-50 text-grayscale-50"
                 />
                 <label htmlFor={String(index)}>{item.title}</label>
