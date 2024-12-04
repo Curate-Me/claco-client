@@ -191,13 +191,13 @@ export const ClacoBookDetailPage = () => {
         <div className="relative flex flex-col pt-[46px] items-center justify-center px-6">
           <div className="flex justify-center items-center w-full mb-[56px] h-[26px] relative">
             <BackArrow
-            width="8"
-            height="15"
-            viewBox="0 0 11 20"
-            className="absolute left-0 cursor-pointer"
-            onClick={() => navigate(-1)}
+              width="8"
+              height="15"
+              viewBox="0 0 11 20"
+              className="absolute left-0 cursor-pointer"
+              onClick={() => navigate(-1)}
             />
-            <span className="headline2-bold text-grayscale-80 text-center">
+            <span className="text-center headline2-bold text-grayscale-80">
               {currentClacoBook}
             </span>
           </div>
@@ -221,7 +221,7 @@ export const ClacoBookDetailPage = () => {
             </div>
           </div>
           <div
-            className="absolute -bottom-[250px] right-[26px] w-[70px] h-[70px] bg-primary rounded-full flex justify-center items-center"
+            className="absolute -bottom-[130px] right-[26px] w-[70px] h-[70px] bg-primary rounded-full flex justify-center items-center"
             onClick={gotoTicketCreate}
           >
             <Plus viewBox="0 0 22 22" width={40} height={40} />
@@ -285,7 +285,6 @@ export const ClacoBookDetailPage = () => {
                       src={image.ticketImage}
                       alt="클라코 티켓 이미지"
                       className="w-[240px] h-[530px]"
-                      crossOrigin="anonymous"
                       onClick={() => gotoTicketDetail(image.id)}
                     />
                   </div>
@@ -295,7 +294,7 @@ export const ClacoBookDetailPage = () => {
         </>
 
         <div
-          className="absolute bottom-[57px] right-[26px] w-[70px] h-[70px] bg-primary rounded-full flex justify-center items-center"
+          className="absolute bottom-[120px] right-[26px] w-[70px] h-[70px] bg-primary rounded-full flex justify-center items-center"
           onClick={gotoTicketCreate}
         >
           <Plus viewBox="0 0 22 22" width={40} height={40} />

@@ -39,7 +39,7 @@ export const ShowFilter = ({ onClose, onApply }: ShowFilterProps) => {
       setSelectedLocation(parsedFilter.selectedLocation || []);
       setSelectedFeatures(parsedFilter.categories || []);
       setRangeStart(
-        parsedFilter.startDate ? new Date(parsedFilter.startDate) : null,
+        parsedFilter.startDate ? new Date(parsedFilter.startDate) : null
       );
       setRangeEnd(parsedFilter.endDate ? new Date(parsedFilter.endDate) : null);
     }
@@ -92,7 +92,7 @@ export const ShowFilter = ({ onClose, onApply }: ShowFilterProps) => {
       endDate: endDate,
       categories: selectedFeatures,
     };
-    console.log(filterObj);
+    // console.log(filterObj);
 
     localStorage.setItem("filterObj", JSON.stringify(filterObj));
   };
@@ -101,7 +101,7 @@ export const ShowFilter = ({ onClose, onApply }: ShowFilterProps) => {
     console.log(label);
     if (values.every((value) => selectedLocation.includes(value))) {
       setSelectedLocation(
-        selectedLocation.filter((loc) => !values.includes(loc)),
+        selectedLocation.filter((loc) => !values.includes(loc))
       );
     } else {
       setSelectedLocation([...selectedLocation, ...values]);
