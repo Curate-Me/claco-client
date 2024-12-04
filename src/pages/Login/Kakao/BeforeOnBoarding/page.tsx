@@ -14,17 +14,23 @@ export const BeforeOnBoardingPage = () => {
       try {
         if (!accessToken) {
           console.error("No access token found");
-          navigate("/");
           return;
         }
 
         localStorage.setItem("accessToken", accessToken);
-        await refreshToken();
+
+        try {
+          await refreshToken();
+        } catch (error) {
+          console.error(error);
+          localStorage.clear();
+          return;
+        }
+
         navigate("/tos");
       } catch (error) {
         console.error(error);
         localStorage.clear();
-        navigate("/");
       }
     };
 

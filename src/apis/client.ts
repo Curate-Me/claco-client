@@ -14,10 +14,8 @@ client.interceptors.response.use(
   (res) => {
     if (res.data.refreshed) {
       const new_accessToken = res.headers["authorization"];
-      if (new_accessToken) {
-        localStorage.setItem("accessToken", new_accessToken);
-        window.location.replace("/main");
-      }
+      localStorage.setItem("accessToken", new_accessToken);
+      window.location.replace("/main");
     }
 
     // /* 해당 에러 발생 시 재로그인 하도록 로그인 화면으로 리다이렉트 */
