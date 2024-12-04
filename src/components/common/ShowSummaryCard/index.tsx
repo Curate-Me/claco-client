@@ -31,7 +31,8 @@ export const ShowSummaryCard = ({ data }: ShowSummaryCardProps) => {
         <img
           src={data.poster}
           alt="poster"
-          className="w-[131px] h-[172px] rounded-[5px] object-cover"
+          className="w-[123px] h-[172px] rounded-[5px] object-cover"
+          onClick={() => gotoShowDetail(data.id)}
         />
         <div className="absolute top-0 left-0 w-full h-[70px] bg-gradient-to-b from-[rgba(0,0,0,0.40)] to-[rgba(102,102,102,0.00)] pointer-events-none"></div>
 
@@ -40,7 +41,7 @@ export const ShowSummaryCard = ({ data }: ShowSummaryCardProps) => {
         </div>
 
         <span
-          className="absolute top-[13px] right-[10px]"
+          className="absolute top-[13px] right-[10px] z-50"
           onClick={handleLike}
         >
           {isLiked ? (
@@ -51,7 +52,7 @@ export const ShowSummaryCard = ({ data }: ShowSummaryCardProps) => {
         </span>
       </div>
 
-      <div className="flex flex-col ml-4 max-w-[207px]" onClick={() => gotoShowDetail(data.id)}>
+      <div className="flex flex-col relative ml-4 max-w-[207px]" onClick={() => gotoShowDetail(data.id)}>
         <div className="flex flex-col min-w-[186px]">
           <span className="caption-12 self-start mb-[9px]">
             <CategoryTag categoryType={data.prfstate} />
@@ -79,6 +80,7 @@ export const ShowSummaryCard = ({ data }: ShowSummaryCardProps) => {
             </span>
           ))}
         </div>
+        <div className="absolute right-0 bottom-0 w-[63px] h-[26px] bg-gradient-to-r from-transparent to-[#1C1C1C]" />
       </div>
     </div>
   );

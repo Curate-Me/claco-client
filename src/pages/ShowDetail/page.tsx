@@ -29,6 +29,14 @@ export const ShowDetailPage = () => {
   const reviewRef = useRef<HTMLDivElement>(null);
   const relatedShowsRef = useRef<HTMLDivElement>(null);
 
+  const { id } = useParams<{ id: string }>();
+  const { data, isLoading } = useGetShowDetail(Number(id));
+  const showDetail = data?.result;
+  const { seats, prices, minPrice, maxPrice } = extractPricesWithSeats(
+    showDetail?.pcseguidance || "",
+  );
+  const { shouldShowSkeleton } = useDeferredLoading(isLoading);
+
   useEffect(() => {
     const sectionRefs = {
       "공연 정보": showInfoRef,
@@ -106,14 +114,6 @@ export const ShowDetailPage = () => {
     }
   };
 
-  const { id } = useParams<{ id: string }>();
-  const { data, isLoading } = useGetShowDetail(Number(id));
-  const showDetail = data?.result;
-  const { seats, prices, minPrice, maxPrice } = extractPricesWithSeats(
-    showDetail?.pcseguidance || "",
-  );
-  const { shouldShowSkeleton } = useDeferredLoading(isLoading);
-
   const displayedPrice = (
     minPrice: number | string | null,
     maxPrice: number | string | null,
@@ -126,12 +126,12 @@ export const ShowDetailPage = () => {
         ? `${minPrice.toLocaleString()}원`
         : `${minPrice.toLocaleString()}원-${maxPrice.toLocaleString()}원`;
     }
-    return "가격 정보 없음";
+    return "";
   };
 
-  if (shouldShowSkeleton) {
+  if (isLoading || shouldShowSkeleton) {
     return (
-      <div className="relative flex flex-col min-h-screen px-[24px] pt-[61px] pb-[60px]">
+      <div className="relative flex flex-col min-h-screen px-6 pt-[73px] pb-[60px]">
         <ClacoMain className="mb-[38px]" />
         <BackArrow
           width="8"
@@ -150,21 +150,21 @@ export const ShowDetailPage = () => {
   return (
     <div className="pt-[73px] pb-[40px]">
       <ShowOverview
-        prfstate={showDetail?.prfstate || "공연 정보 없음"}
+        prfstate={showDetail?.prfstate || ""}
         prfprice={displayedPrice(minPrice, maxPrice)}
-        genrenm={showDetail?.genrenm || "공연 정보 없음"}
-        prfnm={showDetail?.prfnm || "공연 이름 없음"}
+        genrenm={showDetail?.genrenm || ""}
+        prfnm={showDetail?.prfnm || ""}
         poster={showDetail?.poster || ""}
-        area={showDetail?.area || "공연 장소 정보 없음"}
+        area={showDetail?.area || ""}
         prfruntime={timeToMinutes(
-          showDetail?.prfruntime || "러닝타임 정보 없음",
+          showDetail?.prfruntime || "",
         )}
-        prfage={showDetail?.prfage || "연령 제한 정보 없음"}
+        prfage={showDetail?.prfage || ""}
         prfdate={extractDateRange(
           showDetail?.prfpdfrom || "",
           showDetail?.prfpdto || "",
         )}
-        summary={showDetail?.summary || "공연 설명 없음"}
+        summary={showDetail?.summary || ""}
         categories={showDetail?.categories || []}
         liked={!!showDetail?.liked}
       />
@@ -194,9 +194,9 @@ export const ShowDetailPage = () => {
 
       <div ref={showInfoRef} data-section-id="공연 정보">
         <ShowEssentials
-          fcltynm={showDetail?.fcltynm || "공연 장소 정보 없음"}
+          fcltynm={showDetail?.fcltynm || ""}
           prfruntime={timeToMinutes(
-            showDetail?.prfruntime || "러닝타임 정보 없음",
+            showDetail?.prfruntime || "",
           )}
           prfdate={extractDateRange(
             showDetail?.prfpdfrom || "",
@@ -211,7 +211,7 @@ export const ShowDetailPage = () => {
         <ShowPoster
           showFullImage={showFullImage}
           setShowFullImage={setShowFullImage}
-          styurl={showDetail?.styurl || "공연 상세 정보 없음"}
+          styurl={showDetail?.styurl || ""}
         />
       </div>
       <div ref={reviewRef} data-section-id="감상 리뷰">

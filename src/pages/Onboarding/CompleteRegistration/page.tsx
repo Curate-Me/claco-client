@@ -17,7 +17,7 @@ export const CompleteRegistrationPage = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowLoading(false);
-    }, 8000);
+    }, 5000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -35,7 +35,7 @@ export const CompleteRegistrationPage = () => {
             loop
             animationData={LottieData}
             play
-            className="absolute top-0"
+            className="w-full absolute top-[-50px]"
           />
         </div>
       ) : (

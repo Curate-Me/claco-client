@@ -15,3 +15,4 @@ export { default as useGetClacoBookList } from "./useGetClacoBookList";
 export { default as useGetClacoTicketList } from "./useGetClacoTicketList";
 export { default as useGetTicketReviewDetail } from "./useGetTicketReviewDetail";
 export { default as useGetConcertLikes } from "./useGetConcertLikes";
+export { default as useGetReviewAutoCompleteSearch } from "./useGetReviewAutoCompleteSearch";

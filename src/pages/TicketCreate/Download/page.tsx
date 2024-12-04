@@ -19,7 +19,7 @@ export const TicketDownloadPage = () => {
   const [loadingState, setLoadingState] = useState<boolean>(true);
   const posterUrl = (localStorage.getItem("poster") || "").replace(
     /^"|"$/g,
-    "",
+    ""
   );
 
   const { mutate: uploadTicketImage, data: ticketData } = usePutTicketImage();
@@ -51,7 +51,7 @@ export const TicketDownloadPage = () => {
     try {
       const canvas = await html2canvas(ticketRef.current, {
         scale: 2,
-        backgroundColor: "#1C1C1C",
+        backgroundColor: null,
         useCORS: true,
         allowTaint: true,
         logging: true,
@@ -74,7 +74,7 @@ export const TicketDownloadPage = () => {
           onSuccess: () => {
             setIsChecked(true);
           },
-        },
+        }
       );
     } catch (error) {
       console.error("티켓 이미지 변환/업로드 실패:", error);
@@ -149,7 +149,7 @@ export const TicketDownloadPage = () => {
 
       <div className="relative mt-[40px]">
         {loadingState && (
-          <div className="bg-dark w-screen min-h-[630px] absolute inset-0 flex items-center justify-center z-50">
+          <div className="bg-dark min-h-[630px] absolute inset-0 flex items-center justify-center z-50">
             <span className="headline2-bold text-grayscale-90">
               티켓을 만들고 있어요
             </span>
