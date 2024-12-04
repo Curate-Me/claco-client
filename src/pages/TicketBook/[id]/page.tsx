@@ -221,7 +221,7 @@ export const ClacoBookDetailPage = () => {
             </div>
           </div>
           <div
-            className="absolute -bottom-[250px] right-[26px] w-[70px] h-[70px] bg-primary rounded-full flex justify-center items-center"
+            className="absolute -bottom-[130px] right-[26px] w-[70px] h-[70px] bg-primary rounded-full flex justify-center items-center"
             onClick={gotoTicketCreate}
           >
             <Plus viewBox="0 0 22 22" width={40} height={40} />
@@ -294,7 +294,7 @@ export const ClacoBookDetailPage = () => {
         </>
 
         <div
-          className="absolute bottom-[57px] right-[26px] w-[70px] h-[70px] bg-primary rounded-full flex justify-center items-center"
+          className="absolute bottom-[120px] right-[26px] w-[70px] h-[70px] bg-primary rounded-full flex justify-center items-center"
           onClick={gotoTicketCreate}
         >
           <Plus viewBox="0 0 22 22" width={40} height={40} />
