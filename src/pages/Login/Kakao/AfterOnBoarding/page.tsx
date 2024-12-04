@@ -19,7 +19,15 @@ export const AfterOnBoardingPage = () => {
         }
 
         localStorage.setItem("accessToken", accessToken);
-        await refreshToken();
+
+        try {
+          await refreshToken();
+        } catch (error) {
+          console.error(error);
+          localStorage.clear();
+          return;
+        }
+
         setNickname(nickname);
         navigate("/main");
       } catch (error) {
