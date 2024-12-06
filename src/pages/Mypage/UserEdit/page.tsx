@@ -28,12 +28,20 @@ export const UserEditPage = () => {
 
   const handleConfirmClick = () => {
     try {
-      uploadUserInfo({
-        updateNickname: nickname,
-        updateImage: profileImage,
-      });
-      console.log("현재 닉네임:", nickname);
-      setNickname(nickname);
+      uploadUserInfo(
+        {
+          updateNickname: nickname,
+          updateImage: profileImage,
+        },
+        {
+          onSuccess: (data) => {
+            setInitialProfileImage(
+              `${data.result.imageUrl}?timestamp=${Date.now()}`,
+            );
+            setNickname(nickname);
+          },
+        },
+      );
     } catch (error) {
       console.error(error);
     }
@@ -70,7 +78,11 @@ export const UserEditPage = () => {
             <div className="rounded-full bg-grayscale-30 mb-4">
               {profileImage ? (
                 <img
-                  src={URL.createObjectURL(profileImage)}
+                  src={
+                    profileImage
+                      ? URL.createObjectURL(profileImage)
+                      : initialProfileImage
+                  }
                   alt="Profile Preview"
                   className="w-[84px] h-[84px] max-w-[84px] max-h-[84px] rounded-full object-cover"
                 />
