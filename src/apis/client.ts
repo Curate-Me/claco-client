@@ -5,7 +5,6 @@ const client = axios.create({
   baseURL: import.meta.env.VITE_SERVER_URL,
   withCredentials: true,
   headers: {
-    "Access-Control-Allow-Origin": `${import.meta.env.VITE_SERVER_URL}`,
     "Content-Type": "application/json",
   },
 });
