@@ -1,11 +1,11 @@
-import { RouterProvider } from 'react-router-dom';
-import AppRegister from '@/libraries/index';
-import Router from '@/routes/router';
+import { RouterProvider } from "react-router-dom";
+import Router from "@/routes/router";
+import AppContainer from "@/libraries/index";
 
 export default function App() {
   return (
-    <AppRegister>
+    <AppContainer>
       <RouterProvider router={Router} fallbackElement={null} />
-    </AppRegister>
+    </AppContainer>
   );
 }
