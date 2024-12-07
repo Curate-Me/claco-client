@@ -1,4 +1,3 @@
-import { refreshToken } from "@/apis";
 import { useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
@@ -10,31 +9,10 @@ export const BeforeOnBoardingPage = () => {
 
   //온보딩 과정에서 사용할 액세스 토큰 로컬 스토리지에 저장
   useEffect(() => {
-    const handleOnboarding = async () => {
-      try {
-        if (!accessToken) {
-          console.error("No access token found");
-          return;
-        }
-
-        localStorage.setItem("accessToken", accessToken);
-
-        try {
-          await refreshToken();
-        } catch (error) {
-          console.error(error);
-          localStorage.clear();
-          return;
-        }
-
-        navigate("/tos");
-      } catch (error) {
-        console.error(error);
-        localStorage.clear();
-      }
-    };
-
-    handleOnboarding();
+    if (accessToken) {
+      localStorage.setItem("accessToken", accessToken);
+      navigate("/tos");
+    }
   }, [accessToken, navigate]);
 
   return <>온보딩 진행 중...</>;
