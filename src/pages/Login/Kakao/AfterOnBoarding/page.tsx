@@ -1,4 +1,3 @@
-import { refreshToken } from "@/apis";
 import { useUserStore } from "@/libraries/store/user";
 import { useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
@@ -11,32 +10,11 @@ export const AfterOnBoardingPage = () => {
   const setNickname = useUserStore((state) => state.setNickname);
 
   useEffect(() => {
-    const handleAfterOnboarding = async () => {
-      try {
-        if (!accessToken) {
-          console.error("Access token not found");
-          return;
-        }
-
-        localStorage.setItem("accessToken", accessToken);
-
-        try {
-          await refreshToken();
-        } catch (error) {
-          console.error(error);
-          localStorage.clear();
-          return;
-        }
-
-        setNickname(nickname);
-        navigate("/main");
-      } catch (error) {
-        console.error(error);
-        localStorage.clear();
-      }
-    };
-
-    handleAfterOnboarding();
+    if (accessToken) {
+      localStorage.setItem("accessToken", accessToken);
+      setNickname(nickname);
+      navigate("/main");
+    }
   }, [accessToken, nickname, setNickname, navigate]);
 
   return <>온보딩 진행 완료된 사용자</>;
