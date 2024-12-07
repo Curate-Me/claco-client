@@ -1,5 +1,4 @@
 import axios, { InternalAxiosRequestConfig } from "axios";
-import refreshToken from "./refreshToken";
 
 const client = axios.create({
   baseURL: import.meta.env.VITE_SERVER_URL,
@@ -30,19 +29,6 @@ client.interceptors.response.use(
     return res;
   },
   async (error) => {
-    if (error.response?.status === 401) {
-      try {
-        await refreshToken();
-
-        return client.request(error.config);
-      } catch (refreshError) {
-        console.error(refreshError);
-
-        localStorage.clear();
-        window.location.replace("/");
-      }
-    }
-
     console.error(error);
     return Promise.reject(error);
   },
