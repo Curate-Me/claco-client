@@ -13,6 +13,7 @@ export const MyPage = () => {
   const navigate = useNavigate();
   const { data, isLoading } = useGetUserInfo();
   const userInfoData = data?.result;
+  const [updatedImageUrl, setUpdatedImageUrl] = useState<string | null>(null);
   const tabs = ["나의 취향 분석", "좋아요한 공연"];
 
   const { shouldShowSkeleton } = useDeferredLoading(isLoading);
@@ -22,6 +23,15 @@ export const MyPage = () => {
       console.log(userInfoData);
     }
   }, [userInfoData, isLoading]);
+
+  useEffect(() => {
+    if (userInfoData?.imageUrl) {
+      const newImageUrl = `${userInfoData.imageUrl}?timestamp=${Date.now()}`;
+      if (newImageUrl !== updatedImageUrl) {
+        setUpdatedImageUrl(newImageUrl);
+      }
+    }
+  }, [userInfoData?.imageUrl, updatedImageUrl]);
 
   const handleTabClick = (tab: string) => {
     setSelectedTab(tab);
@@ -77,7 +87,7 @@ export const MyPage = () => {
         <div className="flex flex-col items-center justify-center mb-[37px] relative">
           <div className="relative rounded-full bg-grayscale-30 mb-4">
             <img
-              src={userInfoData?.imageUrl}
+              src={updatedImageUrl || userInfoData?.imageUrl}
               alt="Profile Preview"
               className="w-[84px] h-[84px] max-w-[84px] max-h-[84px] rounded-full object-cover"
             />
